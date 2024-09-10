@@ -6,7 +6,7 @@ import { AppContext } from '../../Context/AppContext';
 export default function Show() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { token } = useContext(AppContext);
+  const { token, user } = useContext(AppContext);
   const [post, setPost] = useState<Post | null>(null);
   const [formData, setFormData] = useState({
     title: '',
@@ -31,13 +31,8 @@ export default function Show() {
     setLoading(false);
   }, [id]);
 
-  useEffect(() => {
-    getPost();
-  }, [getPost]);
-
   async function handleEditPost(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(formData);
 
     const res = await fetch(`/api/posts/${id}`, {
       method: 'put',
@@ -48,13 +43,27 @@ export default function Show() {
     });
 
     const data = await res.json();
+    console.log(data);
 
     if (data.errors) {
       setErrors(data.errors);
+    } else if (!res.ok) {
+      // setErrors({ ...errors, message: data.message });
+      navigate(`/posts/${post?.id}`);
     } else {
       navigate(`/posts/${post?.id}`);
     }
   }
+
+  useEffect(() => {
+    getPost();
+  }, [getPost]);
+
+  useEffect(() => {
+    if (post && user && post.user.id !== user.id) {
+      navigate(`/posts/${post.id}`);
+    }
+  }, [post, user, navigate]);
 
   if (loading) {
     return (

@@ -38,8 +38,7 @@ class PostController extends Controller implements HasMiddleware
 
         $post = $request->user()->posts()->create($fields);
 
-        return ['post' => $post, 'user' => $post->user];
-        // return $post;
+        return ['message' => 'The post was created'];
     }
 
     /**
@@ -65,8 +64,7 @@ class PostController extends Controller implements HasMiddleware
 
         $post->update($fields);
 
-        return ['post' => $post, 'user' => $post->user];
-        // return $post;
+        return ['message' => 'The post was updated'];
     }
 
     /**
