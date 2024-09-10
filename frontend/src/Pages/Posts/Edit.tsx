@@ -102,7 +102,7 @@ export default function Show() {
               {errors.body && <span className='error'>{errors.body[0]}</span>}
             </div>
 
-            <button className='primary-btn'>Create</button>
+            <button className='primary-btn'>Update</button>
           </form>
         </>
       ) : (
