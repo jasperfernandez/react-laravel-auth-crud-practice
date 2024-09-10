@@ -59,7 +59,7 @@ export default function Create() {
             value={formData.body}
             onChange={(e) => setFormData({ ...formData, body: e.target.value })}
           />
-          {errors.title && <span className='error'>{errors.title[0]}</span>}
+          {errors.body && <span className='error'>{errors.body[0]}</span>}
         </div>
 
         <button className='primary-btn'>Create</button>

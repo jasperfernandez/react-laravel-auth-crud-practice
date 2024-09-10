@@ -84,7 +84,7 @@ export default function Home() {
                 </div>
                 <Link
                   to={`/posts/${post.id}`}
-                  className='text-white bg-slate-700 h-1/2 p-2 rounded-md'
+                  className='text-white bg-slate-700 h-1/2 text-xs p-1 rounded-md'
                 >
                   Read more
                 </Link>

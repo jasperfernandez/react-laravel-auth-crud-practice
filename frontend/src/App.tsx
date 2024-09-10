@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import { AppContext } from './Context/AppContext';
 import Create from './Pages/Posts/Create';
 import Show from './Pages/Posts/Show';
+import Edit from './Pages/Posts/Edit';
 
 export default function App() {
   const { user } = useContext(AppContext);
@@ -23,6 +24,7 @@ export default function App() {
 
           <Route path='/posts/create' element={user ? <Create /> : <Login />} />
           <Route path='/posts/:id' element={<Show />} />
+          <Route path='/posts/:id/edit' element={user ? <Edit /> : <Login />} />
         </Route>
       </Routes>
     </BrowserRouter>

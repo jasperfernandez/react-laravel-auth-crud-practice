@@ -47,7 +47,7 @@ class PostController extends Controller implements HasMiddleware
      */
     public function show($id)
     {
-        sleep(3);
+        // sleep(3);
         return Post::with('user')->findOrFail($id);
     }
 
