@@ -1,1 +1,1 @@
-## React and Laravel Auth and CRUD Practice
+## React(Typescript) and Laravel - Authentication and CRUD Practice
