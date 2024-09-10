@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export interface Post {
@@ -15,19 +15,54 @@ export interface Post {
 }
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  async function getPosts() {
+  const getPosts = useCallback(async () => {
+    setLoading(true);
+
     const res = await fetch('/api/posts');
     const data = await res.json();
 
     if (res.ok) {
       setPosts(data);
     }
-  }
+    setLoading(false);
+  }, []);
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [getPosts]);
+
+  if (loading) {
+    return (
+      <>
+        <h1 className='title'>Latest Posts</h1>
+        <div className='space-y-6'>
+          <div className='border-slate-400 border p-4 rounded-md border-dashed mt-6 '>
+            <div className='animate-pulse space-y-2'>
+              <div className='h-10 bg-slate-200 rounded-md w-64'></div>
+              <div className='h-6 bg-slate-200 rounded-md w-52'></div>
+              <div className='h-20 bg-slate-200 rounded-md'></div>
+            </div>
+          </div>
+          <div className='border-slate-400 border p-4 rounded-md border-dashed mt-6 '>
+            <div className='animate-pulse space-y-2'>
+              <div className='h-10 bg-slate-200 rounded-md w-64'></div>
+              <div className='h-6 bg-slate-200 rounded-md w-52'></div>
+              <div className='h-20 bg-slate-200 rounded-md'></div>
+            </div>
+          </div>
+          <div className='border-slate-400 border p-4 rounded-md border-dashed mt-6 '>
+            <div className='animate-pulse space-y-2'>
+              <div className='h-10 bg-slate-200 rounded-md w-64'></div>
+              <div className='h-6 bg-slate-200 rounded-md w-52'></div>
+              <div className='h-20 bg-slate-200 rounded-md'></div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
