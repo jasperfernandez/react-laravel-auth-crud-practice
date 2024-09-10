@@ -52,7 +52,7 @@ export default function Show() {
     if (data.errors) {
       setErrors(data.errors);
     } else {
-      navigate('/');
+      navigate(`/posts/${post?.id}`);
     }
   }
 
